@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-# Imagem de desenvolvimento da aplicação Laravel (biblioteca_virtual).
+# Imagem de desenvolvimento da aplicação Laravel (estante_facil).
 # Multi-stage build: dependências PHP e assets do front-end são preparados em
 # estágios separados; a imagem final recebe só o resultado.
 # Dentro de cada estágio, o que muda menos fica em cima, para aproveitar o cache.
