@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\EnderecoFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -10,6 +12,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Endereco extends Model
 {
+    /** @use HasFactory<EnderecoFactory> */
+    use HasFactory;
+
     const CREATED_AT = 'criado_em';
 
     const UPDATED_AT = 'atualizado_em';

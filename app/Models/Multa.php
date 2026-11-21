@@ -66,6 +66,17 @@ class Multa extends Model
         return $this->data_pagamento === null;
     }
 
+    /**
+     * Chamado só pela raiz do agregado: Emprestimo::quitarMulta().
+     */
+    public function quitar(Bibliotecario $bibliotecario): void
+    {
+        $this->forceFill([
+            'data_pagamento' => today(),
+            'bibliotecario_pagamento_id' => $bibliotecario->usuario_id,
+        ])->save();
+    }
+
     public function situacao(): SituacaoMulta
     {
         return $this->estaPendente() ? SituacaoMulta::Pendente : SituacaoMulta::Paga;

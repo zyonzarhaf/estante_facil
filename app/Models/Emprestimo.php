@@ -283,16 +283,16 @@ class Emprestimo extends Model
      */
     public function quitarMulta(Bibliotecario $bibliotecario): void
     {
-        $multa = $this->multa;
-
-        if ($multa === null || ! $multa->estaPendente()) {
+        if (! $this->possuiMultaPendente()) {
             throw new OperacaoRecusada(MotivoRecusa::SemMultaPendente);
         }
 
-        $multa->forceFill([
-            'data_pagamento' => today(),
-            'bibliotecario_pagamento_id' => $bibliotecario->usuario_id,
-        ])->save();
+        $this->multa->quitar($bibliotecario);
+    }
+
+    public function possuiMultaPendente(): bool
+    {
+        return $this->multa?->estaPendente() ?? false;
     }
 
     protected function definirDataPrevista(\DateTimeInterface $data): void

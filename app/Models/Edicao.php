@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\EdicaoFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,6 +13,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Edicao extends Model
 {
+    /** @use HasFactory<EdicaoFactory> */
+    use HasFactory;
+
     const CREATED_AT = 'criado_em';
 
     const UPDATED_AT = 'atualizado_em';

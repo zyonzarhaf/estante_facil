@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\EstadoConservacao;
 use App\Enums\SituacaoCirculacao;
 use App\Enums\SituacaoEmprestimo;
+use Database\Factories\ExemplarFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,6 +18,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Exemplar extends Model
 {
+    /** @use HasFactory<ExemplarFactory> */
+    use HasFactory;
+
     const CREATED_AT = 'criado_em';
 
     const UPDATED_AT = 'atualizado_em';

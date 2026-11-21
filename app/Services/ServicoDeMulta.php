@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\MotivoRecusa;
 use App\Events\LeitorDesbloqueado;
 use App\Exceptions\OperacaoRecusada;
 use App\Models\Bibliotecario;
@@ -22,6 +23,10 @@ class ServicoDeMulta
         DB::transaction(function () use ($emprestimo, $bibliotecario): void {
             $leitor = Leitor::query()->lockForUpdate()->findOrFail($emprestimo->leitor_id);
             $emprestimo = Emprestimo::query()->lockForUpdate()->findOrFail($emprestimo->id);
+
+            if (! $emprestimo->possuiMultaPendente()) {
+                throw new OperacaoRecusada(MotivoRecusa::SemMultaPendente);
+            }
 
             $estavaBloqueado = $leitor->estaBloqueado();
 
