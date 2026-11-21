@@ -66,4 +66,22 @@ class NavegacaoTest extends TestCase
         }
         $this->actingAs($bibliotecario)->get(route('bibliotecario.leitores.show', $leitor))->assertOk();
     }
+
+    public function test_cadastro_pelo_link_volta_ao_formulario_de_origem(): void
+    {
+        $bibliotecario = $this->criarBibliotecario()->usuario;
+        $formularioDeObra = route('bibliotecario.obras.create');
+
+        $this->actingAs($bibliotecario)
+            ->get(route('bibliotecario.obras.create'))
+            ->assertSee(route('bibliotecario.autores.create', ['retorno' => $formularioDeObra]), escape: false);
+
+        $this->actingAs($bibliotecario)
+            ->post(route('bibliotecario.autores.store'), ['nome' => 'Clarice Lispector', 'retorno' => $formularioDeObra])
+            ->assertRedirect($formularioDeObra);
+
+        $this->actingAs($bibliotecario)
+            ->post(route('bibliotecario.autores.store'), ['nome' => 'Cecília Meireles', 'retorno' => 'https://externo.exemplo.com/'])
+            ->assertRedirect(route('bibliotecario.autores.index'));
+    }
 }

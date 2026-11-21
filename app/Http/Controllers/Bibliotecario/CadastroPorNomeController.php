@@ -57,8 +57,8 @@ abstract class CadastroPorNomeController extends Controller
     {
         $this->model()::create($request->validated());
 
-        return redirect()->route("bibliotecario.{$this->recurso()}.index")
-            ->with('sucesso', ucfirst($this->rotulos()['singular']).' cadastrado(a).');
+        return $this->voltarOu($request, route("bibliotecario.{$this->recurso()}.index"),
+            ucfirst($this->rotulos()['singular']).' cadastrado(a).');
     }
 
     protected function formulario(?Model $registro): View

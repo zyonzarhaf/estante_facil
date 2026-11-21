@@ -42,7 +42,7 @@ class ObraController extends Controller
     {
         DB::transaction(fn () => $this->gravar(new Obra, $request->validated()));
 
-        return redirect()->route('bibliotecario.obras.index')->with('sucesso', 'Obra cadastrada.');
+        return $this->voltarOu($request, route('bibliotecario.obras.index'), 'Obra cadastrada.');
     }
 
     public function edit(Obra $obra): View

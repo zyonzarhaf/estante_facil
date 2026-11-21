@@ -46,7 +46,7 @@ class ExemplarController extends Controller
     {
         Exemplar::create($request->validated());
 
-        return redirect()->route('bibliotecario.exemplares.index')->with('sucesso', 'Exemplar cadastrado.');
+        return $this->voltarOu($request, route('bibliotecario.exemplares.index'), 'Exemplar cadastrado.');
     }
 
     public function edit(Exemplar $exemplar): View

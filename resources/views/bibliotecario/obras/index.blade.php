@@ -17,7 +17,7 @@
                             <td>{{ $obra->autores->pluck('nome')->join(', ') }}</td>
                             <td>
                                 {{ $obra->edicoes_count }}
-                                <a href="{{ route('bibliotecario.edicoes.create', ['obra' => $obra->id]) }}" class="ml-2 text-xs text-emerald-800 hover:underline">+ edição</a>
+                                <x-link-cadastro rota="bibliotecario.edicoes.create" rotulo="edição" :parametros="['obra' => $obra->id]" class="ml-2" />
                             </td>
                             <td>
                                 <x-acoes-de-registro

@@ -4,6 +4,7 @@
 <x-layout :titulo="$leitor ? 'Editar leitor' : 'Cadastrar leitor'">
     <form method="POST" action="{{ $leitor ? route('bibliotecario.leitores.update', $leitor) : route('bibliotecario.leitores.store') }}" class="cartao space-y-6">
         @csrf
+        <x-retorno />
         @if ($leitor)
             @method('PUT')
         @endif
@@ -31,7 +32,7 @@
 
         <div class="flex gap-3">
             <button type="submit" class="botao-primario">Salvar</button>
-            <a href="{{ $leitor ? route('bibliotecario.leitores.show', $leitor) : route('bibliotecario.leitores.index') }}" class="botao-secundario">Cancelar</a>
+            <a href="{{ request('retorno') ?: ($leitor ? route('bibliotecario.leitores.show', $leitor) : route('bibliotecario.leitores.index')) }}" class="botao-secundario">Cancelar</a>
         </div>
     </form>
 </x-layout>

@@ -46,7 +46,7 @@ class LeitorController extends Controller
     {
         $leitor = $this->servicoDeLeitor->cadastrar($request->validated());
 
-        return redirect()->route('bibliotecario.leitores.show', $leitor)->with('sucesso', 'Leitor cadastrado.');
+        return $this->voltarOu($request, route('bibliotecario.leitores.show', $leitor), 'Leitor cadastrado.');
     }
 
     public function show(Leitor $leitor): View

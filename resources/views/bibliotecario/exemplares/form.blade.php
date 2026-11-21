@@ -1,6 +1,7 @@
 <x-layout :titulo="$exemplar->exists ? 'Editar exemplar' : 'Cadastrar exemplar'">
     <form method="POST" action="{{ $exemplar->exists ? route('bibliotecario.exemplares.update', $exemplar) : route('bibliotecario.exemplares.store') }}" class="cartao grid gap-4 sm:grid-cols-2">
         @csrf
+        <x-retorno />
         @if ($exemplar->exists)
             @method('PUT')
         @endif
@@ -16,6 +17,7 @@
                 @endforeach
             </select>
             <x-erro-de-campo nome="edicao_id" />
+            <x-link-cadastro rota="bibliotecario.edicoes.create" rotulo="cadastrar edição" />
         </div>
 
         <x-campo nome="codigo_tombo" rotulo="Código de tombo" :valor="$exemplar->codigo_tombo" required />
@@ -33,7 +35,7 @@
 
         <div class="flex gap-3 sm:col-span-2">
             <button type="submit" class="botao-primario">Salvar</button>
-            <a href="{{ route('bibliotecario.exemplares.index') }}" class="botao-secundario">Cancelar</a>
+            <a href="{{ request('retorno') ?: route('bibliotecario.exemplares.index') }}" class="botao-secundario">Cancelar</a>
         </div>
     </form>
 </x-layout>

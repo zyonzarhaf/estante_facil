@@ -1,6 +1,7 @@
 <x-layout :titulo="$edicao->exists ? 'Editar edição' : 'Cadastrar edição'">
     <form method="POST" action="{{ $edicao->exists ? route('bibliotecario.edicoes.update', $edicao) : route('bibliotecario.edicoes.store') }}" class="cartao grid gap-4 sm:grid-cols-2">
         @csrf
+        <x-retorno />
         @if ($edicao->exists)
             @method('PUT')
         @endif
@@ -14,6 +15,7 @@
                 @endforeach
             </select>
             <x-erro-de-campo nome="obra_id" />
+            <x-link-cadastro rota="bibliotecario.obras.create" rotulo="cadastrar obra" />
         </div>
 
         <div>
@@ -25,6 +27,7 @@
                 @endforeach
             </select>
             <x-erro-de-campo nome="editora_id" />
+            <x-link-cadastro rota="bibliotecario.editoras.create" rotulo="cadastrar editora" />
         </div>
 
         <x-campo nome="isbn" rotulo="ISBN (13 dígitos)" :valor="$edicao->isbn" required inputmode="numeric" />
@@ -35,7 +38,7 @@
 
         <div class="flex gap-3 sm:col-span-2">
             <button type="submit" class="botao-primario">Salvar</button>
-            <a href="{{ route('bibliotecario.edicoes.index') }}" class="botao-secundario">Cancelar</a>
+            <a href="{{ request('retorno') ?: route('bibliotecario.edicoes.index') }}" class="botao-secundario">Cancelar</a>
         </div>
     </form>
 </x-layout>

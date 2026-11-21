@@ -42,7 +42,7 @@ class EdicaoController extends Controller
     {
         Edicao::create($request->validated());
 
-        return redirect()->route('bibliotecario.edicoes.index')->with('sucesso', 'Edição cadastrada.');
+        return $this->voltarOu($request, route('bibliotecario.edicoes.index'), 'Edição cadastrada.');
     }
 
     public function edit(Edicao $edicao): View

@@ -19,7 +19,7 @@
                             <td class="font-mono">{{ $edicao->isbn }}</td>
                             <td>
                                 {{ $edicao->exemplares_count }}
-                                <a href="{{ route('bibliotecario.exemplares.create', ['edicao' => $edicao->id]) }}" class="ml-2 text-xs text-emerald-800 hover:underline">+ exemplar</a>
+                                <x-link-cadastro rota="bibliotecario.exemplares.create" rotulo="exemplar" :parametros="['edicao' => $edicao->id]" class="ml-2" />
                             </td>
                             <td>
                                 <x-acoes-de-registro

@@ -7,6 +7,10 @@
             <x-campo nome="codigo_tombo" rotulo="Código de tombo" required class="w-48" />
             <button type="submit" class="botao-primario">Emprestar</button>
         </form>
+        <div class="mt-2 flex gap-4">
+            <x-link-cadastro rota="bibliotecario.leitores.create" rotulo="cadastrar leitor" />
+            <x-link-cadastro rota="bibliotecario.exemplares.create" rotulo="cadastrar exemplar" />
+        </div>
     </section>
 
     <section class="cartao overflow-x-auto">

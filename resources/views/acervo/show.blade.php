@@ -10,6 +10,9 @@
         @if ($obra->idioma_original)
             <p><span class="font-medium">Idioma original:</span> {{ $obra->idioma_original }}</p>
         @endif
+        @if (auth()->user()->ehBibliotecario())
+            <p><x-link-cadastro rota="bibliotecario.edicoes.create" rotulo="cadastrar edição desta obra" :parametros="['obra' => $obra->id]" /></p>
+        @endif
         @if ($obra->url_acesso)
             <p><span class="font-medium">Acesso online:</span> <a href="{{ $obra->url_acesso }}" class="text-emerald-800 underline" target="_blank" rel="noopener">{{ $obra->url_acesso }}</a></p>
         @endif
@@ -21,6 +24,9 @@
                 {{ $edicao->numero_edicao }}ª edição · {{ $edicao->editora->nome }}
                 <span class="font-normal text-stone-500">· ISBN {{ $edicao->isbn }}{{ $edicao->ano_publicacao ? ' · '.$edicao->ano_publicacao : '' }}</span>
             </h2>
+            @if (auth()->user()->ehBibliotecario())
+                <x-link-cadastro rota="bibliotecario.exemplares.create" rotulo="cadastrar exemplar desta edição" :parametros="['edicao' => $edicao->id]" class="mb-2" />
+            @endif
 
             @if ($edicao->exemplares->isEmpty())
                 <x-vazio>Nenhum exemplar desta edição.</x-vazio>
